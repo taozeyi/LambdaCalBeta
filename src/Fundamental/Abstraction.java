@@ -12,7 +12,7 @@ public class Abstraction extends Expression {
 
 	@Override
 	public <X> X accept(Visitor<X> visitor) {
-		System.out.println(visitor.toString());
+
 		return visitor.visit(this);
 	}
 

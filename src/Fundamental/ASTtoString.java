@@ -2,7 +2,7 @@ package Fundamental;
 
 public class ASTtoString implements Expression.Visitor<Expression> {
 
-	private char LAMBDA= '\\';
+	private char LAMBDA = '\\';
 	private StringBuilder buf = new StringBuilder();
 
 	public static String toString(Expression lambda) {
@@ -11,34 +11,34 @@ public class ASTtoString implements Expression.Visitor<Expression> {
 		return printer.buf.toString();
 	}
 
-	public String makeString(Expression lambda) {
-		lambda.accept(this);
-		return buf.toString();
-	}
-
 	public Expression visit(Abstraction abs) {
-		Expression e = abs;
+		Expression exp = abs;
 		buf.append(LAMBDA);
-		while (e.isAbstraction()) {
-			Abstraction eAbs = (Abstraction) e;
+		if (exp.isAbstraction()) {
+			Abstraction eAbs = (Abstraction) exp;
 			buf.append(eAbs.id);
-			e = eAbs.exp;
+			exp = eAbs.exp;
 		}
+
 		buf.append('.');
-		e.accept(this);
+
+		exp.accept(this);
+
 		return abs;
 	}
 
 	public Expression visit(Application app) {
-		
+
 		Expression l = app.exp1;
 		Expression r = app.exp2;
 		boolean lpar = l.isAbstraction();
-		boolean rpar = !r.isAtomic();
+		boolean rpar = !r.isSingleFragment();
 
 		if (lpar)
 			buf.append('(');
+
 		l.accept(this);
+
 		if (lpar)
 			buf.append(')');
 

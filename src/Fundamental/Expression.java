@@ -19,12 +19,13 @@ public abstract class Expression {
 		return false;
 	}
 
-	public boolean isAtomic() {
+	public boolean isSingleFragment() {
 		return isVariable();
 	}
 
 	public String toString() {
-		return ASTtoString.toString(this);
+		//return ASTtoString.toString(this);
+		return TempGenerator.Generator(this);
 	}
 
 	public abstract <X> X accept(Visitor<X> visitor);

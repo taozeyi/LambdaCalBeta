@@ -13,7 +13,8 @@ public class Parser {
 		token = lexer.TokenScanner();
 		return this.parseLambda();
 	}
-    //recursive parsing
+
+	// recursive parsing
 	private Expression parseLambda() {
 
 		if (token.type == TokenType.LAMBDA) {
@@ -86,44 +87,36 @@ public class Parser {
 
 	public static void main(String[] args) {
 
-		Expression exp1 = new Abstraction("x", new Variable("x"));
-		System.out.println("parsed new1: " + exp1.toString());
-
-		Expression exp2 = new Application(new Abstraction("x",
-				new Variable("x")), new Variable("x"));
-		System.out.println("parsed new2: " + exp2.toString());
-
-		Parser parser0 = new Parser(new Lexer("(\\x.x)(\\y.y(mn))"));
+		Parser parser0 = new Parser(new Lexer("x"));
 		Expression exp0 = parser0.parse();
 		System.out.println("parsed 1: " + exp0);
 
-		Parser parser = new Parser(new Lexer("\\x.x"));
-		Expression exp = parser.parse();
-		System.out.println("parsed 2: " + exp);
+		Parser parser1 = new Parser(new Lexer("\\x.x"));
+		Expression exp1 = parser1.parse();
+		System.out.println("parsed 2: " + exp1);
 
-		Parser parser3 = new Parser(new Lexer("x\\y.y"));
+		Parser parser3 = new Parser(new Lexer("xx"));
 		Expression exp3 = parser3.parse();
+		System.out.println("parser 3 type is Application: "
+				+ exp3.isApplication());
 		System.out.println("parsed 3 : " + exp3);
 
-		Parser parser4 = new Parser(new Lexer("xxxx"));
+		Parser parser4 = new Parser(new Lexer("x\\x.x"));
 		Expression exp4 = parser4.parse();
 		System.out.println("parsed 4 : " + exp4);
 
-		Parser parser5 = new Parser(new Lexer("(((xx)x)x)"));
+		Parser parser5 = new Parser(new Lexer("(\\x.x)x"));
 		Expression exp5 = parser5.parse();
 		System.out.println("parsed 5 : " + exp5);
 
-		Parser parser6 = new Parser(new Lexer("(\\x.x)y"));
+		Parser parser6 = new Parser(new Lexer("xxxx"));
 		Expression exp6 = parser6.parse();
-		System.out.println("parsed 5 : " + exp6);
-		System.out.println("parser6 type is: " + exp6.isAbstraction());
+		System.out.println("parsed 6 : " + exp6);
 
-		Parser parser7 = new Parser(new Lexer("\\x.(xy)"));
+		Parser parser7 = new Parser(new Lexer("(\\x.x)(\\y.y(yz))"));
 		Expression exp7 = parser7.parse();
 		System.out.println("parsed 7 : " + exp7);
-		System.out.println("parser7 type is: " + exp7.isAbstraction());
-		//System.out.println("parser7 type is: " + parser7);
-		
+
 	}
 
 }
