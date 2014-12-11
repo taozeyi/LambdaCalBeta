@@ -1,6 +1,6 @@
 package Fundamental;
 
-public class TempGenerator implements Expression.Visitor<Expression> {
+public class TempGenerator implements Visitor<Expression> {
 
 	private StringBuilder buf = new StringBuilder();
 
@@ -11,7 +11,6 @@ public class TempGenerator implements Expression.Visitor<Expression> {
 	}
 
 	public Expression visit(Abstraction abs) {
-
 		Expression exp = abs;
 
 		if (exp.isAbstraction()) {
@@ -54,5 +53,4 @@ public class TempGenerator implements Expression.Visitor<Expression> {
 
 		return var;
 	}
-
 }

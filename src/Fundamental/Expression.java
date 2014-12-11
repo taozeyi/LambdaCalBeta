@@ -1,40 +1,21 @@
 package Fundamental;
 
-public abstract class Expression {
+public interface Expression {
 
-	public static Expression parse(String text) {
-		Parser parser = new Parser(new Lexer(text));
-		return parser.parse();
-	}
+	//public Expression parse(String text);
 
-	public boolean isVariable() {
-		return false;
-	}
+	public boolean isVariable();
 
-	public boolean isApplication() {
-		return false;
-	}
+	public boolean isApplication();
 
-	public boolean isAbstraction() {
-		return false;
-	}
+	public boolean isAbstraction();
 
-	public boolean isSingleFragment() {
-		return isVariable();
-	}
+	public boolean isSingleFragment();
 
-	public String toString() {
-		//return ASTtoString.toString(this);
-		return TempGenerator.Generator(this);
-	}
+	public String toString();
 
 	public abstract <X> X accept(Visitor<X> visitor);
+	
+	
 
-	public static interface Visitor<X> {
-		public X visit(Abstraction abs);
-
-		public X visit(Application app);
-
-		public X visit(Variable l);
-	}
 }

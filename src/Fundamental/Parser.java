@@ -89,6 +89,7 @@ public class Parser {
 
 		Parser parser0 = new Parser(new Lexer("x"));
 		Expression exp0 = parser0.parse();
+		
 		System.out.println("parsed 1: " + exp0);
 
 		Parser parser1 = new Parser(new Lexer("\\x.x"));
@@ -97,8 +98,6 @@ public class Parser {
 
 		Parser parser3 = new Parser(new Lexer("xx"));
 		Expression exp3 = parser3.parse();
-		System.out.println("parser 3 type is Application: "
-				+ exp3.isApplication());
 		System.out.println("parsed 3 : " + exp3);
 
 		Parser parser4 = new Parser(new Lexer("x\\x.x"));
@@ -116,6 +115,8 @@ public class Parser {
 		Parser parser7 = new Parser(new Lexer("(\\x.x)(\\y.y(yz))"));
 		Expression exp7 = parser7.parse();
 		System.out.println("parsed 7 : " + exp7);
+		
+	
 
 	}
 

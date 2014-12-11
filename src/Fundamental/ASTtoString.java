@@ -1,9 +1,12 @@
 package Fundamental;
 
-public class ASTtoString implements Expression.Visitor<Expression> {
+import java.util.ArrayList;
 
+public class ASTtoString implements Visitor<Expression> {
+    //private ArrayList<String> list;
 	private char LAMBDA = '\\';
 	private StringBuilder buf = new StringBuilder();
+	
 
 	public static String toString(Expression lambda) {
 		ASTtoString printer = new ASTtoString();
@@ -12,6 +15,7 @@ public class ASTtoString implements Expression.Visitor<Expression> {
 	}
 
 	public Expression visit(Abstraction abs) {
+		
 		Expression exp = abs;
 		buf.append(LAMBDA);
 		if (exp.isAbstraction()) {
@@ -23,35 +27,43 @@ public class ASTtoString implements Expression.Visitor<Expression> {
 		buf.append('.');
 
 		exp.accept(this);
-
+		
 		return abs;
 	}
 
 	public Expression visit(Application app) {
-
+		buf.append("(");
 		Expression l = app.exp1;
 		Expression r = app.exp2;
 		boolean lpar = l.isAbstraction();
 		boolean rpar = !r.isSingleFragment();
 
-		if (lpar)
-			buf.append('(');
+		if (lpar){
+			//buf.append('(');
+			}
 
 		l.accept(this);
 
-		if (lpar)
-			buf.append(')');
-
-		if (rpar)
-			buf.append('(');
+		if (lpar){
+			//buf.append(')');
+			}
+		if (rpar){
+			//buf.append('(');
+			}
+		
 		r.accept(this);
-		if (rpar)
-			buf.append(')');
+		
+		if (rpar){
+			//buf.append(')');
+			}
+		buf.append(')');
+		//list.add("app");
 		return app;
 	}
 
 	public Expression visit(Variable var) {
 		buf.append(var.id);
+		//list.add("var");
 		return var;
 	}
 
