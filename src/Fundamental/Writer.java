@@ -27,8 +27,6 @@ public class Writer {
 		while (exp0.isAbstraction()) {
 			Abstraction abs = (Abstraction) exp0;
 			String body =abs.exp.toString();
-			//String original = exp0.toString();
-			//String sub = original.substring(3, original.length());
 			Parser parser = new Parser(new Lexer(body));
 			exp0 = parser.parse();
 
@@ -36,6 +34,7 @@ public class Writer {
 				Abstraction abss = (Abstraction) exp0;
 				pw.println("public static class Lam0 implements Expression {");
 				pw.println("public Lam0() {};");
+				pw.println("public Expression app(Expression e){ return Lam"+(c+1)+"("+abss.id+", e)");
 				pw.println("public String toString() {");
 				pw.println("return '(\\ " + abs.id + ". ' + (new Lam" + (c + 1)
 						+ "('" + abss.id + "', null)).toString() + ')';}");
@@ -49,6 +48,7 @@ public class Writer {
 					pw.println("public Lam"
 							+ c
 							+ "(String s_str, Expression s) { this.s_str = s_str;this.s = s;}");
+					pw.println("public Expression app(Expression e){ return Lam"+(c+1)+"("+abss.id+", e)");
 					pw.println("public String toString() {");
 					pw.println("return '(\\ y. ' +(new lam" + (c + 1) + "('"
 							+ abss.id + "', e)).toString();+')'}}");
@@ -61,6 +61,7 @@ public class Writer {
 					pw.println("public Lam"
 							+ c
 							+ "(String s_str, Expression s) { this.s_str = s_str;this.s = s;}");
+					pw.println("public Expression app(Expression e){ return 'e.toStrig+abss.toString'");
 					pw.println("public String toString() {");
 					pw.println("if (s == null) return '\\ " + abs.id + "." + s
 							+ ";");

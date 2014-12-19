@@ -85,7 +85,7 @@ public class Parser {
 
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		Parser parser0 = new Parser(new Lexer("x"));
 		Expression exp0 = parser0.parse();
@@ -119,5 +119,6 @@ public class Parser {
 	
 
 	}
+	for testing purpose*/
 
 }

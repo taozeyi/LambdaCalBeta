@@ -1,5 +1,5 @@
 package Fundamental;
-
+//This class is just for supporting purpose
 public class TempGenerator implements Visitor<Expression> {
 
 	private StringBuilder buf = new StringBuilder();

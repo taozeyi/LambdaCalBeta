@@ -2,8 +2,6 @@ package Fundamental;
 
 public interface Expression {
 
-	//public Expression parse(String text);
-
 	public boolean isVariable();
 
 	public boolean isApplication();
